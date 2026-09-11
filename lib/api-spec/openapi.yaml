@@ -1,0 +1,317 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: Simulated REST API for a Protheus integration console
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: dashboard
+    description: Operational overview
+  - name: master-data
+    description: Protheus master-data queries
+  - name: orders
+    description: Sales order queries
+  - name: routines
+    description: Simulated Protheus Web Service routines
+  - name: stock
+    description: Simulated stock queries
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /dashboard/summary:
+    get:
+      operationId: getDashboardSummary
+      tags: [dashboard]
+      summary: Get dashboard summary
+      responses:
+        "200":
+          description: Dashboard overview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardSummary"
+  /customers:
+    get:
+      operationId: listCustomers
+      tags: [master-data]
+      summary: List customers
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/Search"
+      responses:
+        "200":
+          description: Paginated customer list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomerPage"
+  /products:
+    get:
+      operationId: listProducts
+      tags: [master-data]
+      summary: List products
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/Search"
+      responses:
+        "200":
+          description: Paginated product list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductPage"
+  /orders:
+    get:
+      operationId: listOrders
+      tags: [orders]
+      summary: List sales orders
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/Search"
+      responses:
+        "200":
+          description: Paginated order list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderPage"
+  /protheus/routines/execute:
+    post:
+      operationId: executeProtheusRoutine
+      tags: [routines]
+      summary: Execute a simulated Protheus routine
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoutineInput"
+      responses:
+        "200":
+          description: Routine execution result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoutineExecution"
+        "400":
+          description: Invalid routine request
+  /protheus/stock:
+    get:
+      operationId: getStock
+      tags: [stock]
+      summary: Query simulated stock
+      parameters:
+        - name: productCode
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 30
+      responses:
+        "200":
+          description: Stock position
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StockResponse"
+components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    PageSize:
+      name: pageSize
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 10
+    Search:
+      name: search
+      in: query
+      required: false
+      schema:
+        type: string
+        maxLength: 100
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    Customer:
+      type: object
+      required: [id, code, name, document, city, state, status, revenue]
+      properties:
+        id: { type: string }
+        code: { type: string }
+        name: { type: string }
+        document: { type: string }
+        city: { type: string }
+        state: { type: string }
+        status: { type: string, enum: [Ativo, Inativo] }
+        revenue: { type: number }
+    Product:
+      type: object
+      required: [id, code, name, category, unit, stock, price, status]
+      properties:
+        id: { type: string }
+        code: { type: string }
+        name: { type: string }
+        category: { type: string }
+        unit: { type: string }
+        stock: { type: number }
+        price: { type: number }
+        status: { type: string, enum: [Ativo, Bloqueado] }
+    Order:
+      type: object
+      required: [id, number, customer, date, status, total, items]
+      properties:
+        id: { type: string }
+        number: { type: string }
+        customer: { type: string }
+        date: { type: string }
+        status: { type: string, enum: [Faturado, Pendente, Cancelado] }
+        total: { type: number }
+        items: { type: integer }
+    Pagination:
+      type: object
+      required: [page, pageSize, total, totalPages]
+      properties:
+        page: { type: integer }
+        pageSize: { type: integer }
+        total: { type: integer }
+        totalPages: { type: integer }
+    CustomerPage:
+      type: object
+      required: [data, pagination]
+      properties:
+        data:
+          type: array
+          items: { $ref: "#/components/schemas/Customer" }
+        pagination: { $ref: "#/components/schemas/Pagination" }
+    ProductPage:
+      type: object
+      required: [data, pagination]
+      properties:
+        data:
+          type: array
+          items: { $ref: "#/components/schemas/Product" }
+        pagination: { $ref: "#/components/schemas/Pagination" }
+    OrderPage:
+      type: object
+      required: [data, pagination]
+      properties:
+        data:
+          type: array
+          items: { $ref: "#/components/schemas/Order" }
+        pagination: { $ref: "#/components/schemas/Pagination" }
+    RevenuePoint:
+      type: object
+      required: [month, revenue, orders]
+      properties:
+        month: { type: string }
+        revenue: { type: number }
+        orders: { type: integer }
+    IntegrationStatus:
+      type: object
+      required: [name, status, latency, lastSync]
+      properties:
+        name: { type: string }
+        status: { type: string, enum: [Operacional, Atenção, Indisponível] }
+        latency: { type: integer }
+        lastSync: { type: string }
+    Activity:
+      type: object
+      required: [id, title, description, timestamp, tone]
+      properties:
+        id: { type: string }
+        title: { type: string }
+        description: { type: string }
+        timestamp: { type: string }
+        tone: { type: string, enum: [success, warning, info, error] }
+    DashboardSummary:
+      type: object
+      required: [totalRevenue, revenueChange, orderCount, customerCount, productCount, successRate, revenueSeries, integrations, activities]
+      properties:
+        totalRevenue: { type: number }
+        revenueChange: { type: number }
+        orderCount: { type: integer }
+        customerCount: { type: integer }
+        productCount: { type: integer }
+        successRate: { type: number }
+        revenueSeries:
+          type: array
+          items: { $ref: "#/components/schemas/RevenuePoint" }
+        integrations:
+          type: array
+          items: { $ref: "#/components/schemas/IntegrationStatus" }
+        activities:
+          type: array
+          items: { $ref: "#/components/schemas/Activity" }
+    RoutineInput:
+      type: object
+      required: [routineCode]
+      properties:
+        routineCode: { type: string, minLength: 1, maxLength: 60 }
+        parameters:
+          type: object
+          additionalProperties: { type: string }
+    RoutineExecution:
+      type: object
+      required: [executionId, routineCode, status, message, startedAt, durationMs]
+      properties:
+        executionId: { type: string }
+        routineCode: { type: string }
+        status: { type: string, enum: [Sucesso, Erro] }
+        message: { type: string }
+        startedAt: { type: string }
+        durationMs: { type: integer }
+    StockItem:
+      type: object
+      required: [productCode, productName, warehouse, available, reserved, updatedAt]
+      properties:
+        productCode: { type: string }
+        productName: { type: string }
+        warehouse: { type: string }
+        available: { type: number }
+        reserved: { type: number }
+        updatedAt: { type: string }
+    StockResponse:
+      type: object
+      required: [items, totalAvailable, queriedAt]
+      properties:
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/StockItem" }
+        totalAvailable: { type: number }
+        queriedAt: { type: string }
+

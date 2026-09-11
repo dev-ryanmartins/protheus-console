@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Protheus Console"
+description = "Painel corporativo para monitorar integrações com o ERP Protheus da TOTVS, consultar clientes, produtos e pedidos, e acompanhar rotinas REST simuladas."
+version = "1.0.0"
+id = "artifacts/protheus-console"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18459
+
+[services.development]
+run = "pnpm --filter @workspace/protheus-console run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/protheus-console", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/protheus-console/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18459"
+BASE_PATH = "/"

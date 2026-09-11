@@ -1,0 +1,12 @@
+[
+  {"id":"cus-001","code":"000001","name":"Metalúrgica Horizonte Ltda.","document":"12.345.678/0001-90","city":"São Paulo","state":"SP","status":"Ativo","revenue":284500},
+  {"id":"cus-002","code":"000002","name":"Grupo Vale Norte","document":"23.456.789/0001-12","city":"Belo Horizonte","state":"MG","status":"Ativo","revenue":196800},
+  {"id":"cus-003","code":"000003","name":"Construtora Pioneira","document":"34.567.890/0001-34","city":"Curitiba","state":"PR","status":"Ativo","revenue":157200},
+  {"id":"cus-004","code":"000004","name":"Distribuidora Atlântico","document":"45.678.901/0001-56","city":"Recife","state":"PE","status":"Ativo","revenue":139400},
+  {"id":"cus-005","code":"000005","name":"Comercial Santa Clara","document":"56.789.012/0001-78","city":"Campinas","state":"SP","status":"Inativo","revenue":84500},
+  {"id":"cus-006","code":"000006","name":"Indústria Nova Era","document":"67.890.123/0001-90","city":"Joinville","state":"SC","status":"Ativo","revenue":223900},
+  {"id":"cus-007","code":"000007","name":"Rede Bom Preço","document":"78.901.234/0001-12","city":"Salvador","state":"BA","status":"Ativo","revenue":118600},
+  {"id":"cus-008","code":"000008","name":"Logística Estrada Real","document":"89.012.345/0001-34","city":"Goiânia","state":"GO","status":"Ativo","revenue":101300},
+  {"id":"cus-009","code":"000009","name":"Agropecuária Campo Azul","document":"90.123.456/0001-56","city":"Ribeirão Preto","state":"SP","status":"Ativo","revenue":176400},
+  {"id":"cus-010","code":"000010","name":"Serviços Integrais","document":"01.234.567/0001-78","city":"Porto Alegre","state":"RS","status":"Ativo","revenue":93200}
+]

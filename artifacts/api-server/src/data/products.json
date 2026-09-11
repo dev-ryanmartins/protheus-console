@@ -1,0 +1,12 @@
+[
+  {"id":"prd-001","code":"MP-1001","name":"Chapa de aço carbono 2mm","category":"Matéria-prima","unit":"KG","stock":8420,"price":18.9,"status":"Ativo"},
+  {"id":"prd-002","code":"MP-1002","name":"Bobina galvanizada 1,5mm","category":"Matéria-prima","unit":"KG","stock":5130,"price":24.5,"status":"Ativo"},
+  {"id":"prd-003","code":"PA-2001","name":"Suporte estrutural modelo A","category":"Produto acabado","unit":"UN","stock":1280,"price":149.9,"status":"Ativo"},
+  {"id":"prd-004","code":"PA-2002","name":"Suporte estrutural modelo B","category":"Produto acabado","unit":"UN","stock":760,"price":189.9,"status":"Ativo"},
+  {"id":"prd-005","code":"IN-3001","name":"Parafuso sextavado M8","category":"Insumo","unit":"CX","stock":245,"price":89.9,"status":"Ativo"},
+  {"id":"prd-006","code":"IN-3002","name":"Porca autotravante M8","category":"Insumo","unit":"CX","stock":192,"price":76.4,"status":"Ativo"},
+  {"id":"prd-007","code":"PA-2003","name":"Kit de fixação industrial","category":"Produto acabado","unit":"KIT","stock":320,"price":349.0,"status":"Bloqueado"},
+  {"id":"prd-008","code":"MP-1003","name":"Alumínio extrudado 30mm","category":"Matéria-prima","unit":"KG","stock":2270,"price":32.8,"status":"Ativo"},
+  {"id":"prd-009","code":"PA-2004","name":"Perfil de acabamento branco","category":"Produto acabado","unit":"UN","stock":1850,"price":42.5,"status":"Ativo"},
+  {"id":"prd-010","code":"IN-3003","name":"Adesivo estrutural 400g","category":"Insumo","unit":"UN","stock":88,"price":56.9,"status":"Ativo"}
+]

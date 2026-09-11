@@ -1,0 +1,14 @@
+[
+  {"id":"ord-001","number":"000145","customer":"Metalúrgica Horizonte Ltda.","date":"2026-09-10","status":"Faturado","total":28450,"items":12},
+  {"id":"ord-002","number":"000144","customer":"Grupo Vale Norte","date":"2026-09-10","status":"Pendente","total":19680,"items":8},
+  {"id":"ord-003","number":"000143","customer":"Construtora Pioneira","date":"2026-09-09","status":"Faturado","total":15720,"items":6},
+  {"id":"ord-004","number":"000142","customer":"Distribuidora Atlântico","date":"2026-09-09","status":"Faturado","total":13940,"items":10},
+  {"id":"ord-005","number":"000141","customer":"Comercial Santa Clara","date":"2026-09-08","status":"Cancelado","total":8450,"items":4},
+  {"id":"ord-006","number":"000140","customer":"Indústria Nova Era","date":"2026-09-08","status":"Faturado","total":22390,"items":9},
+  {"id":"ord-007","number":"000139","customer":"Rede Bom Preço","date":"2026-09-07","status":"Pendente","total":11860,"items":5},
+  {"id":"ord-008","number":"000138","customer":"Logística Estrada Real","date":"2026-09-06","status":"Faturado","total":10130,"items":7},
+  {"id":"ord-009","number":"000137","customer":"Agropecuária Campo Azul","date":"2026-09-05","status":"Faturado","total":17640,"items":11},
+  {"id":"ord-010","number":"000136","customer":"Serviços Integrais","date":"2026-09-04","status":"Faturado","total":9320,"items":3},
+  {"id":"ord-011","number":"000135","customer":"Metalúrgica Horizonte Ltda.","date":"2026-09-03","status":"Faturado","total":23800,"items":8},
+  {"id":"ord-012","number":"000134","customer":"Grupo Vale Norte","date":"2026-09-02","status":"Pendente","total":17400,"items":6}
+]

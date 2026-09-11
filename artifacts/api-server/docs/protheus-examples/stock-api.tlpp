@@ -1,0 +1,31 @@
+/*
+    Exemplo didático de API REST em TLPP.
+    A implementação real deve aplicar autenticação, autorização e paginação.
+*/
+
+#Include "tlpp-core.th"
+#Include "tlpp-rest.th"
+
+@Restful(true)
+User Function ApiStock()
+    Local oResponse := JsonObject():New()
+    Local aItems    := {}
+    Local cProduto  := ""
+
+    cProduto := AllTrim(RestGetQuery("productCode"))
+
+    // Em um ambiente real, a consulta usaria SB2/stock e o dicionário SX3.
+    AAdd(aItems, {;
+        "productCode" => Iif(Empty(cProduto), "PA-2001", cProduto),;
+        "productName" => "Suporte estrutural modelo A",;
+        "warehouse"   => "01",;
+        "available"   => 794,;
+        "reserved"    => 102,;
+        "updatedAt"   => DateTime()
+    })
+
+    oResponse["items"] := aItems
+    oResponse["totalAvailable"] := 794
+    oResponse["queriedAt"] := DateTime()
+
+Return oResponse
